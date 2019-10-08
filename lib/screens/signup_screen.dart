@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:messenger_app/screens/chat_screen.dart';
 import 'package:messenger_app/screens/login_screen.dart';
 import 'package:messenger_app/utilities/custom_widgtes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   static String id = 'signup_screen';
@@ -12,6 +14,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen>{
+
+  final _auth = FirebaseAuth.instance;
 
   String nickname;
   String phoneNo;
@@ -47,14 +51,15 @@ class _SignUpScreenState extends State<SignUpScreen>{
               icon: Icons.phone,
               labelText: "Phone Number",
               onChanged: (String value){
-                phoneNo = value;
+                phoneNo = "$value@messenger.com";
               },
             ),
             InputTextField(
+              obscureText: true,
               icon: Icons.lock_outline,
               labelText: "Password",
               onChanged: (String value){
-                phoneNo = value;
+                password = value;
               },
             ),
             Padding(
@@ -66,8 +71,16 @@ class _SignUpScreenState extends State<SignUpScreen>{
                 tag: 'signup_button',
                 child: DefaultRaisedButton(
                   text: "Sign Up",
-                  onPressed: (){
-
+                  onPressed: () async {
+                    try {
+                      print("$phoneNo\n$password");
+                      final newUser = await _auth.createUserWithEmailAndPassword(email: phoneNo, password: password);
+                      if(newUser != null){
+                        Navigator.pushNamedAndRemoveUntil(context, ChatScreen.id, (route) => false);
+                      }
+                    }catch(e){
+                      print(e);
+                    }
                   },
                 ),
               ),

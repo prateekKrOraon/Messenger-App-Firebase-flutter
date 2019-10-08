@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:messenger_app/screens/login_screen.dart';
 import 'package:messenger_app/screens/signup_screen.dart';
 import 'package:messenger_app/utilities/custom_widgtes.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget{
 
@@ -11,7 +12,8 @@ class WelcomeScreen extends StatefulWidget{
 
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen>{
+class _WelcomeScreenState extends State<WelcomeScreen> with TickerProviderStateMixin{
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,14 +33,15 @@ class _WelcomeScreenState extends State<WelcomeScreen>{
                     size: 150.0,
                   ),
                 ),
-                Text(
-                  "Messenger",
+                TypewriterAnimatedTextKit(
+                  isRepeatingAnimation: false,
+                  text:["Messenger"],
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  textStyle: TextStyle(
                     fontFamily: 'Sacramento',
                     fontSize: 80.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -74,7 +77,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>{
                 ],
               ),
             ),
-
           ],
         ),
       ),

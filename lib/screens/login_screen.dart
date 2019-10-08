@@ -39,13 +39,14 @@ class _LoginScreenState extends State<LoginScreen>{
                 ),
             ),
             InputTextField(
-              icon: Icons.lock_outline,
-              labelText: "Username",
+              icon: Icons.phone,
+              labelText: "Phone Number",
               onChanged: (String value){
                 userName = value;
               },
             ),
             InputTextField(
+              obscureText: true,
               icon: Icons.lock_outline,
               labelText: "Password",
               onChanged: (String value){
@@ -62,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen>{
                 child: DefaultRaisedButton(
                   text: "Log In",
                   onPressed: (){
-
+                    //TODO: implement this
                   },
                 ),
               ),

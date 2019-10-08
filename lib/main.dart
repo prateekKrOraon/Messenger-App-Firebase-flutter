@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:messenger_app/screens/chat_screen.dart';
 import 'package:messenger_app/screens/login_screen.dart';
 import 'package:messenger_app/screens/signup_screen.dart';
 import 'package:messenger_app/screens/welcome_screen.dart';
@@ -11,7 +12,7 @@ class MessengerApp extends StatelessWidget{
     return MaterialApp(
       title: "Messenger",
       theme: ThemeData.dark().copyWith(
-        accentColor: Colors.blue,
+        accentColor: Colors.lightBlue,
         primaryColor: Colors.blueGrey[700],
       ),
       initialRoute: WelcomeScreen.id,
@@ -19,6 +20,7 @@ class MessengerApp extends StatelessWidget{
         WelcomeScreen.id: (context) => WelcomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
+        ChatScreen.id: (context) => ChatScreen(),
       },
     );
   }

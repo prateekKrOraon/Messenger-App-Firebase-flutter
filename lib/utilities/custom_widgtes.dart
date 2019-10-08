@@ -40,11 +40,12 @@ class DefaultRaisedButton extends StatelessWidget{
 
 class InputTextField extends StatelessWidget{
 
-  InputTextField({this.icon,this.labelText,this.onChanged});
+  InputTextField({this.icon,this.labelText,this.onChanged,this.obscureText:false});
 
   final Function onChanged;
   final IconData icon;
   final String labelText;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,14 @@ class InputTextField extends StatelessWidget{
         horizontal: 50.0,
       ),
       child: TextField(
+        obscureText: obscureText,
         decoration: InputDecoration(
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.lightBlue,
+              width: 2.0,
+            ),
+          ),
           border: UnderlineInputBorder(),
           suffixIcon: Icon(
             this.icon,
