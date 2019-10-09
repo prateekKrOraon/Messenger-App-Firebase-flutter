@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 
@@ -112,6 +113,108 @@ class Footer extends StatelessWidget {
           onPressed: this.onPressed,
         ),
       ],
+    );
+  }
+
+}
+
+
+
+
+class MessageBubble extends StatelessWidget{
+
+  MessageBubble({this.sender,this.text,this.isLoggedInUser,this.timeStamp});
+  final String sender;
+  final String text;
+  final Timestamp timeStamp;
+  final bool isLoggedInUser;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: isLoggedInUser? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: <Widget>[
+          Material(
+            borderRadius: BorderRadius.only(
+              bottomLeft: isLoggedInUser? Radius.circular(30.0) : Radius.circular(0),
+              topLeft: Radius.circular(30.0),
+              topRight: Radius.circular(30.0),
+              bottomRight: isLoggedInUser? Radius.circular(0) : Radius.circular(30.0),
+            ),
+            elevation: 2.0,
+            color: isLoggedInUser? Colors.lightBlue : Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 0.0),
+                  child: Text(
+                    sender,
+                    style: TextStyle(
+                        fontSize: 18.0,
+                        color: isLoggedInUser? Colors.yellow : Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'NotoSansSC'
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 10.0),
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                        fontSize: 18.0,
+                        color: isLoggedInUser? Colors.white : Colors.black,
+                        fontFamily: 'NotoSansSC'
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MessageField extends StatelessWidget{
+
+  MessageField({this.onChanged,this.controller});
+
+  final Function onChanged;
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: TextField(
+        controller: this.controller,
+        onChanged: this.onChanged,
+        style: TextStyle(
+            color: Colors.black,
+            fontSize: 20.0,
+            fontFamily: 'NotoSansSC'
+        ),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(0.0),
+          prefix: IconButton(
+            splashColor: Colors.black,
+            color: Colors.black,
+            icon: Icon(Icons.insert_emoticon),
+            onPressed: (){
+              print("pressed");
+            },
+          ),
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(50.0),
+              borderSide:BorderSide.none
+          ),
+        ),
+      ),
     );
   }
 
